@@ -19,6 +19,18 @@ app.post('/crearcategoria', (req, res)=>{
     })
 })
 
+
+//Alta de Productos
+app.post('/crearproducto', (req, res)=>{
+    modeloProducto.create(req.body)
+    .then((data)=>{
+        res.json( {datos:data})
+    })
+    .catch((error)=>{
+        res.json({error: error})
+    })
+})
+
 app.listen(3000, ()=>{
     console.log('Server UP running in http://localhost:3000')
 })
