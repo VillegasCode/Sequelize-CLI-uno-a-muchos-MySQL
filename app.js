@@ -20,7 +20,7 @@ app.post('/crearcategoria', (req, res)=>{
 })
 
 
-//Alta de Productos
+//Alta de Productos Registrar Productos
 app.post('/crearproducto', (req, res)=>{
     modeloProducto.create(req.body)
     .then((data)=>{
@@ -30,6 +30,21 @@ app.post('/crearproducto', (req, res)=>{
         res.json({error: error})
     })
 })
+
+
+//Mostrar productos
+app.get('/mostrarproductos', (req, res)=>{
+    modeloProducto.findAll({
+        include: [{ model:modeloCategoria }]
+    })
+    .then((data)=>{
+        res.json({datos:data})
+    })
+    .catch((error)=>{
+        res.json({error: error})
+    })
+})
+
 
 app.listen(3000, ()=>{
     console.log('Server UP running in http://localhost:3000')
