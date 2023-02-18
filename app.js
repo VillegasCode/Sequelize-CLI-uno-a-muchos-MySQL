@@ -46,6 +46,33 @@ app.get('/mostrarproductos', (req, res)=>{
 })
 
 
+//Eliminar productos
+app.delete('/borrarproducto/:id', (req, res)=>{
+    modeloProducto.destroy({
+        where : {id : req.params.id}
+    })
+    .then((data)=>{
+        res.json({datos:data})
+    })
+    .catch((error)=>{
+        res.json({error: error})
+    })
+})
+
+
+//Editar/Actualizar productos
+app.put('/editarproducto/:id', (req, res)=>{
+    modeloProducto.update(req.body, {
+        where : {id : req.params.id}
+    })
+    .then((data)=>{
+        res.json({datos:data})
+    })
+    .catch((error)=>{
+        res.json({error: error})
+    })
+})
+
 app.listen(3000, ()=>{
     console.log('Server UP running in http://localhost:3000')
 })
